@@ -1,4 +1,4 @@
-package com.datastructures.list;
+package com.algorithms.list;
 
 /**
  * Node data structure to store data for a particular node in a list

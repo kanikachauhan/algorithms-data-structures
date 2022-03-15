@@ -1,4 +1,4 @@
-package com.datastructures.graph;
+package com.algorithms.graph;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
