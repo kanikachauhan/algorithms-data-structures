@@ -164,6 +164,43 @@ public class SingleLinkedList<T extends Comparable<T>> {
 	}
 	
 	/**
+	 * get nthnode of a list
+	 * @param index
+	 * @return
+	 */
+	public Node<T> get(int index){
+		if(index == -1)
+			return null;
+		int count  = 0;
+		Node<T> temp = head;
+		while(count!=index) {
+			count = count+1;
+			temp = temp.next;
+		}
+		return temp;
+	}
+	
+	/**
+	 * nth node from the end of the list
+	 * @param n
+	 * @return
+	 */
+	public Node<T> nthNodeEnd(int n){
+		Node<T> first = head;
+		Node<T> second = head;
+		int count = 0;
+		while(count!=n) {
+			count = count+1;
+			first = first.next;
+		}
+		while(first!=null) {
+			second = second.next;
+			first = first.next;
+		}
+		return second;
+	}
+	
+	/**
 	 * printing all elements of a list
 	 */
 	public void print() {

@@ -6,17 +6,25 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SingleLinkedListTest {
+	
+	SingleLinkedList<Integer> list;
+	
+	@BeforeEach
+	public void setUp() {
+		list = new SingleLinkedList<Integer>();
+		list.append(1); list.append(2); list.append(3); list.append(4);
+	}
+	
 
 	/**
-	 * tests append,search,indexof methods
+	 * tests append,search,indexof,get methods
 	 */
 	@Test
 	public void testInsert() {
-		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
-		list.append(1); list.append(2); list.append(3); list.append(4);
 		assertNotNull(list);
 		assertNotNull(list.head);
 		list.insertBefore(200, list.head.next.next);
@@ -30,6 +38,9 @@ public class SingleLinkedListTest {
 		assertTrue(list.search(2000));
 		assertEquals("Index difference", 3, list.indexOf(2000));
 		assertEquals("Index difference", -1,list.indexOf(102324));
+		assertEquals("Difference in value",2000 ,(int)(list.get(3).data));
+		assertEquals("Difference in value",1000 ,(int)(list.get(0).data));
+		assertEquals("Difference in value",200, (int)(list.nthNodeEnd(3).data));
 	}
 	
 	/**
@@ -37,8 +48,6 @@ public class SingleLinkedListTest {
 	 */
 	@Test
 	public void testLength() {
-		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
-		list.append(1); list.append(2); list.append(3); list.append(4);
 		assertEquals(4, list.size());
 		assertEquals(4, list.sizeRecur(list.head, 0));
 	}
@@ -48,8 +57,6 @@ public class SingleLinkedListTest {
 	 */
 	@Test
 	public void testSearch() {
-		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
-		list.append(1); list.append(2); list.append(3); list.append(4);
 		assertTrue(list.search(3));
 		assertFalse(list.searchRecur(list.head, 13));
 		assertTrue(list.searchRecur(list.head, 3));
