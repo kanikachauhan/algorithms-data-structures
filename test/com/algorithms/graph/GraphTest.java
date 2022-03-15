@@ -1,9 +1,11 @@
-package com.datastructures.graph;
+package com.algorithms.graph;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.algorithms.graph.Graph;
 
 public class GraphTest {
 
