@@ -46,5 +46,23 @@ public class MatrixTest {
 		mat = new int[][]{{ 1, 2, 3, 4 },{ 5, 6, 7, 8 },{ 9, 10, 11, 12 },{ 13, 14, 15, 16 }};
 		matrix.findTranspose(mat);
 		matrix.printMatrix(mat);
+		mat = new int[][] {{1,2,3,4,5},{4,3,1,2,6},{8,7,6,5,4},{5,7,8,9,10}};
+		matrix.countAllSortedRows(mat);
+		int m1[][] = new int[][] {{1,1,1,1},{2,2,2,2},{3,3,3,3},{4,4,4,4}};
+		int m2[][] = new int[][] {{1,1,1,1},{2,2,2,2},{3,3,3,3},{4,4,4,4}};
+		matrix.add(m1, m2);
+		matrix.subtract(m1, m2);
+		double matr[][] = new double[][] {{0.1,0.5,0.4},{0,0.5,0.5},{0.9,0.1,0}};
+		System.out.println(matrix.isMarkov(matr));
+		mat = new int[][]{{ 1, 2, 3, 4 },{ 5, 6, 7, 8 },{ 9, 10, 11, 12 },{ 13, 14, 15, 16 }};
+		matrix.findFrequency(mat);
+		mat = new int[][] {{1,2,3},{3,1,2},{2,3,1}};
+		matrix.checkRotations(mat);
+		mat = new int[][] {{1,3,5},{3,2,4},{5,4,1}};
+		System.out.println(matrix.isSymmetric(mat));
+		mat = new int[][]{{ 1, 2, 3, 4 },{ 5, 6, 7, 8 },{ 9, 10, 11, 12 },{ 13, 14, 15, 16 }};
+		matrix.printSpiral(mat);
+		matrix.printAntiSpiral(mat);
+	
 	}
 }

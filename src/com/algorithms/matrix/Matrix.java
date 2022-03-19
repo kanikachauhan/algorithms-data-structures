@@ -1,6 +1,7 @@
 package com.algorithms.matrix;
 
 import java.util.LinkedHashMap;
+import java.util.Stack;
 
 public class Matrix {
 
@@ -353,5 +354,266 @@ public class Matrix {
 				matrix[j][i] = temp;
 			}
 		}
+	}
+	
+	/**
+	 * Given a 2D matrix, print all elements of the given matrix in diagonal order.
+	 */
+	public void diagonalOrder(int matrix[][]) {
+		for(int i=0;i<matrix.length;i++) {
+			for(int j=0;j<matrix[i].length;j++) {
+				System.out.println(matrix[i][j]);
+			}
+		}
+	}
+	
+	/**
+	 * Given a matrix of m*n size, the task is to count all the rows in a matrix that are sorted 
+	 * either in strictly increasing order or in strictly decreasing order?
+	 */
+	public void countAllSortedRows(int matrix[][]) {
+		int m = matrix.length;
+		int count = 0;
+		for(int i=0;i<m;i++) {
+			boolean flag = true;
+			int n = matrix[i].length;
+			int t1 = matrix[i][0];
+			int t2 = matrix[i][1];
+			if(t1<t2) {
+				for(int j=1;j<n-1;j++) {
+					if(matrix[i][j]>matrix[i][j+1]) {
+						flag = false;
+						break;
+					}
+				}
+			}
+			else if(t1>t2) {
+				for(int j=1;j<n-1;j++) {
+					if(matrix[i][j]<matrix[i][j+1]) {
+						flag = false;
+						break;
+					}
+				}
+			}
+			if(flag) {
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+	
+	/**
+	 * adds two square matrices
+	 */
+	public void add(int mat1[][],int mat2[][]) {
+		int res[][] = new int[mat1.length][mat1[0].length];
+		for(int i=0;i<mat1.length;i++) {
+			for(int j=0;j<mat1[i].length;j++) {
+				res[i][j] = mat1[i][j]+mat2[i][j];
+			}
+		}
+		printMatrix(res);
+	}
+	
+	/**
+	 * subtract two square matrices
+	 */
+	public void subtract(int mat1[][],int mat2[][]) {
+		int res[][] = new int[mat1.length][mat1[0].length];
+		for(int i=0;i<mat1.length;i++) {
+			for(int j=0;j<mat1[i].length;j++) {
+				res[i][j] = mat1[i][j]-mat2[i][j];
+			}
+		}
+		printMatrix(res);
+	}
+	
+	/**
+	 * Given a m x n 2D matrix, check if it is a Markov Matrix.
+	 * Markov Matrix : The matrix in which the sum of each row is equal to 1.
+	 */
+	public boolean isMarkov(double matrix[][]) {
+		boolean flag = true;
+		for(int i=0;i<matrix.length;i++) {
+			double sum = 0.0;
+			for(int j=0;j<matrix[i].length;j++) {
+				sum = sum+matrix[i][j];
+			}
+			if(sum!=1.0) {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+	
+	/**
+	 * Given a matrix of order m*n then the task is to find the frequency of even and odd numbers in matrix 
+	 */
+	public void findFrequency(int matrix[][]) {
+		int even = 0;
+		int odd = 0;
+		for(int i=0;i<matrix.length;i++) {
+			for(int j=0;j<matrix[i].length;j++) {
+				if(matrix[i][j]%2==0) {
+					even++;
+				}else {
+					odd++;
+				}
+			}
+		}
+		System.out.println(even+" "+odd);
+	}
+	
+	/**
+	 * Given a matrix of n*n size, the task is to find whether all rows are circular rotations of each other or not. 
+	 */
+	public void checkRotations(int matrix[][]) {
+		String str = "";
+		for(int i=0;i<matrix[0].length;i++) {
+			str = str + matrix[0][i];
+		}
+		String tempstr = str + str;
+		for(int i=1;i<matrix.length;i++) {
+			String tstr = "";
+			for(int j=0;j<matrix[i].length;j++) {
+				tstr = tstr+matrix[i][j];
+			}
+			if(!tempstr.contains(tstr)) {
+				System.out.println("no");
+				return;
+			}
+		}
+		System.out.println("yes");
+	}
+	
+	/**
+	 * A square matrix is said to be symmetric matrix if the transpose of the matrix is same as the given matrix.
+	 * Symmetric matrix can be obtain by changing row to column and column to row.
+	 */
+	public boolean isSymmetric(int matrix[][]) {
+		boolean flag = true;
+		for(int i=0;i<matrix.length;i++) {
+			for(int j=0;j<matrix[i].length;j++) {
+				if(matrix[i][j]!=matrix[j][i]) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+	
+	/**
+	 * Given a N x N binary matrix (elements in matrix can be either 1 or 0) 
+	 * where each row and column of the matrix is sorted in ascending order, count number of 0s present in it.
+	 * Expected time complexity is O(N).
+	 */
+	public void countZerosInBinaryMatrix(int matrix[][]) {
+		//TODO
+	}
+	
+	/**
+	 * Print a given matrix in spiral form
+	 */
+	public void printSpiral(int matrix[][]) {
+		int k = 0;
+		int m = matrix.length;
+		int l = 0;
+		int n = matrix.length;
+		while(k<m && l<n) {
+			for(int i=l;i<n;i++) {
+				System.out.print(matrix[k][i]+" ");
+			}
+			k++;
+			for(int i=k;i<m;i++) {
+				System.out.print(matrix[i][n-1]+" ");
+			}
+			n--;
+			if(k<m) {
+				for(int i=n-1;i>=l;i--) {
+					System.out.print(matrix[m-1][i]+" ");
+				}
+				m--;
+			}
+			if(l<n) {
+				for(int i=m-1;i>=k;i--) {
+					System.out.print(matrix[i][l]+" ");
+				}	
+				l++;
+			}
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * print matrix in anti-spiral form
+	 */
+	public void printAntiSpiral(int matrix[][]) {
+		Stack<Integer> stack = new Stack<>();
+		int k = 0;
+		int l = 0;
+		int m = matrix.length;
+		int n = matrix[0].length;
+		while(k<m && l<n) {
+			for(int i=l;i<n;i++) {
+				stack.push(matrix[k][i]);
+			}
+			k++;
+			for(int i=k;i<m;i++) {
+				stack.push(matrix[i][n-1]);
+			}
+			n--;
+			if(k<m) {
+				for(int i=n-1;i>=l;i--) {
+					stack.push(matrix[m-1][i]);
+				}
+				m--;
+			}
+			if(l<n) {
+				for(int i=m-1;i>=k;i--) {
+					stack.push(matrix[i][l]);
+				}
+				l++;
+			}
+		}
+		while(!stack.isEmpty()) {
+			System.out.print(stack.pop()+" ");
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Given a matrix where every element is either ‘O’ or ‘X’, 
+	 * replace ‘O’ with ‘X’ if surrounded by ‘X’. A ‘O’ (or a set of ‘O’) is considered to be by surrounded by ‘X’ 
+	 * if there are ‘X’ at locations just below, just above, just left and just right of it. 
+	 */
+	public void replaceOwithX(char matrix[][]) {
+	//TODO	
+//		int m = matrix.length;
+//		int n = matrix[0].length;
+//		for(int i=0;i<m;i++) {
+//			for(int j=0;j<n;j++) {
+//				if(matrix[i][j]=='O') {
+//					if((i+1)<m && (j+1)<n && (i-1)>0 && (j-1)>0 && matrix[i+1][j]=='X' &&  matrix[i-1][j]=='X' &&  matrix[i][j+1]=='X' &&  matrix[i][j-1]=='X') {
+//						matrix[i][j] = 'Y';
+//					}
+//				}
+//			}
+//		}
+//		
+//		for(int i=0;i<m;i++) {
+//			for(int j=0;j<n;j++) {
+//				if(matrix[i][j]=='Y') {
+//					matrix[i][j] = 'O';
+//				}
+//			}
+//		}
+//		
+//		for(int i=0;i<m;i++) {
+//			for(int j=0;j<n;j++) {
+//				System.out.print(matrix[i][j]+" ");
+//			}System.out.println();
+//		}
 	}
 }
