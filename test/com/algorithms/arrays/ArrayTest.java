@@ -55,4 +55,5 @@ public class ArrayTest {
 		assertEquals("Difference in expected value", 100, res[1]);
 		assertEquals("Difference in expected value", 30, res[2]);
 	}
+	
 }
