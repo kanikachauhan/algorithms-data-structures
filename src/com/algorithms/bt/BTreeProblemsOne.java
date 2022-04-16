@@ -4,11 +4,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class BTree {
+public class BTreeProblemsOne<T> {
 
 	private BTNode<Integer> root;
 	
-	public BTree(Integer data) {
+	public BTreeProblemsOne(Integer data) {
 		root = new BTNode<Integer>(data);
 	}
 	
@@ -36,7 +36,7 @@ public class BTree {
 		System.out.print(node.data+" ");
 	}
 	
-	private void inOrderWithoutRecursion(BTree tree) {
+	private void inOrderWithoutRecursion(BTreeProblemsOne tree) {
 		Stack<BTNode<Integer>> stack = new Stack<>();
 		BTNode<Integer> current = tree.root;
 		while(current!=null || !stack.isEmpty()) {
@@ -63,7 +63,7 @@ public class BTree {
 		nthNodeInorder(node.right, n);
 	}
 	
-	private void levelOrderTraversal(BTree tree) {
+	private void levelOrderTraversal(BTreeProblemsOne tree) {
 		BTNode<Integer> current = tree.root;
 		Queue<BTNode<Integer>> queue = new LinkedList<BTNode<Integer>>();
 		queue.add(current);
@@ -225,9 +225,41 @@ public class BTree {
 		return isIdentical(node1.left, node2.left) && isIdentical(node1.right, node2.right);
 	}
 	
+	private boolean isIdenticalIterative(BTNode<Integer> node1, BTNode<Integer> node2) {
+		if(node1==null && node2==null)
+			return true;
+		if(node1==null || node2==null)
+			return false;
+		Queue<BTNode<Integer>> q1 = new LinkedList<BTNode<Integer>>();
+		q1.add(node1);
+		Queue<BTNode<Integer>> q2 = new LinkedList<BTNode<Integer>>();
+		q2.add(node2);
+		while(!q1.isEmpty() && !q2.isEmpty()) {
+			BTNode<Integer> n1 = q1.poll();
+			BTNode<Integer> n2 = q2.poll();
+			if(n1.data!=n2.data) {
+				return false;
+			}
+			if(n1.left!=null && n2.left!=null) {
+				q1.add(n1.left);
+				q2.add(n2.left);
+			}
+			else if(n1.left!=null || n2.left!=null) {
+				return false;
+			}
+			if(n1.right!=null && n2.right!=null) {
+				q1.add(n1.right);
+				q2.add(n2.right);
+			}
+			else if(n1.right!=null || n2.right!=null) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	public static void main(String[] args) {
-		BTree tree = new BTree(10);
+		BTreeProblemsOne tree = new BTreeProblemsOne(10);
 		tree.root.left = new BTNode<Integer>(20);
 		tree.root.left.left = new BTNode<Integer>(40);
 		tree.root.left.right = new BTNode<Integer>(50);
@@ -247,7 +279,7 @@ public class BTree {
 		tree.printSpiralForm(tree.root);
 		System.out.println(tree.countLeafNodes(tree.root) +" " + tree.countNonLeafNodes(tree.root)+" "+tree.sumLeafNodes(tree.root)+" "+tree.sumRightLeaves(tree.root)+" "+tree.sumLeftLeaves(tree.root));
 		System.out.println(tree.sumAllNode(tree.root));
-		BTree tree1 = new BTree(10);
+		BTreeProblemsOne tree1 = new BTreeProblemsOne(10);
 		tree1.root.left = new BTNode<Integer>(20);
 		tree1.root.left.left = new BTNode<Integer>(40);
 		tree1.root.left.right = new BTNode<Integer>(50);
@@ -255,6 +287,7 @@ public class BTree {
 		tree1.root.right.left = new BTNode<Integer>(60);
 		tree1.root.right.right = new BTNode<Integer>(70);
 		System.out.println(tree.isIdentical(tree.root, tree1.root));
+		System.out.println(tree.isIdenticalIterative(tree.root, tree1.root));
 		
 	}
 }
