@@ -1,5 +1,7 @@
 package com.algorithms.bst;
 
+import java.util.LinkedList;
+
 public class BSTProblemsOne<T> {
 
 	private BSTNode<Integer> root;
@@ -57,11 +59,38 @@ public class BSTProblemsOne<T> {
 		if(nleft!=null)
 			return nleft;
 		count++;
-		System.out.println(count);
 		if(count==k) {
 			return node;
 		}
 		return kthSmallest(node.right, k);
+	}
+	
+	private void nodesInRange(BSTNode<Integer> node, int low, int high) {
+		if(node==null) {
+			return;
+		}
+		int data = node.data;
+		if(data>=low && data<=high) {
+			System.out.print(data+" ");
+		}
+		if(node.data>low) {
+			nodesInRange(node.left, low, high);
+		}
+		nodesInRange(node.right, low, high);	
+	}
+	
+	private int countInRange(BSTNode<Integer> node,int low,int high) {
+		if(node==null) {
+			return 0;
+		}
+		int data = node.data;
+		if(data>=low && data<=high) {
+			return 1+countInRange(node.left, low, high)+countInRange(node.right, low, high);
+		}
+		if(node.data>low) {
+			return countInRange(node.left, low, high);
+		}
+		return countInRange(node.right, low, high);
 	}
 	
 	public static void main(String[] args) {
@@ -77,5 +106,8 @@ public class BSTProblemsOne<T> {
 		System.out.println();
 		System.out.println(bstProblemsOne.minimum(bstProblemsOne.root)+" "+bstProblemsOne.isPresent(bstProblemsOne.root, 40));
 		System.out.println(bstProblemsOne.kthSmallest(bstProblemsOne.root, 3).data);
+		bstProblemsOne.nodesInRange(bstProblemsOne.root, 25, 75);
+		System.out.println();
+		System.out.println(bstProblemsOne.countInRange(bstProblemsOne.root, 25, 75));
 	}
 }
