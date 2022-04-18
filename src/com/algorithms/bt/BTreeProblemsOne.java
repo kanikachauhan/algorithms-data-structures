@@ -36,7 +36,7 @@ public class BTreeProblemsOne<T> {
 		System.out.print(node.data+" ");
 	}
 	
-	private void inOrderWithoutRecursion(BTreeProblemsOne tree) {
+	private void inOrderWithoutRecursion(BTreeProblemsOne<T> tree) {
 		Stack<BTNode<Integer>> stack = new Stack<>();
 		BTNode<Integer> current = tree.root;
 		while(current!=null || !stack.isEmpty()) {
@@ -63,7 +63,7 @@ public class BTreeProblemsOne<T> {
 		nthNodeInorder(node.right, n);
 	}
 	
-	private void levelOrderTraversal(BTreeProblemsOne tree) {
+	private void levelOrderTraversal(BTreeProblemsOne<T> tree) {
 		BTNode<Integer> current = tree.root;
 		Queue<BTNode<Integer>> queue = new LinkedList<BTNode<Integer>>();
 		queue.add(current);
@@ -259,7 +259,7 @@ public class BTreeProblemsOne<T> {
 	}
 	
 	public static void main(String[] args) {
-		BTreeProblemsOne tree = new BTreeProblemsOne(10);
+		BTreeProblemsOne<Integer> tree = new BTreeProblemsOne<>(10);
 		tree.root.left = new BTNode<Integer>(20);
 		tree.root.left.left = new BTNode<Integer>(40);
 		tree.root.left.right = new BTNode<Integer>(50);
@@ -279,7 +279,7 @@ public class BTreeProblemsOne<T> {
 		tree.printSpiralForm(tree.root);
 		System.out.println(tree.countLeafNodes(tree.root) +" " + tree.countNonLeafNodes(tree.root)+" "+tree.sumLeafNodes(tree.root)+" "+tree.sumRightLeaves(tree.root)+" "+tree.sumLeftLeaves(tree.root));
 		System.out.println(tree.sumAllNode(tree.root));
-		BTreeProblemsOne tree1 = new BTreeProblemsOne(10);
+		BTreeProblemsOne<Integer> tree1 = new BTreeProblemsOne<>(10);
 		tree1.root.left = new BTNode<Integer>(20);
 		tree1.root.left.left = new BTNode<Integer>(40);
 		tree1.root.left.right = new BTNode<Integer>(50);
